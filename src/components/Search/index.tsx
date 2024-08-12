@@ -22,13 +22,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="mb-4">
+    <div className="w-full">
       <input
         type="text"
         value={query}
         onChange={handleInputChange}
         placeholder="Search for movies..."
-        className="w-full p-2 border border-gray-300 rounded-lg"
+        className="w-full p-2 border border-gray-300 rounded-full"
       />
     </div>
   );

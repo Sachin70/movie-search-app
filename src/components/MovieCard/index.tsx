@@ -15,6 +15,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
+  // Check if the movie is already in favorites when the component mounts
   useEffect(() => {
     const storedFavorites = JSON.parse(
       localStorage.getItem("favorites") || "[]"
@@ -24,13 +25,16 @@ const MovieCard: React.FC<MovieCardProps> = ({
     );
   }, [id]);
 
+  // Handle adding/removing from favorites
   const handleFavoriteToggle = () => {
     let storedFavorites = JSON.parse(localStorage.getItem("favorites") || "[]");
     if (isFavorite) {
+      // Remove from favorites
       storedFavorites = storedFavorites.filter(
         (movie: { id: number }) => movie.id !== id
       );
     } else {
+      // Add to favorites
       storedFavorites.push({ id, title, posterPath, releaseDate });
     }
     localStorage.setItem("favorites", JSON.stringify(storedFavorites));
@@ -42,16 +46,17 @@ const MovieCard: React.FC<MovieCardProps> = ({
     : "/no-image-available.png";
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 hover:shadow-lg">
       <img className="w-full h-72 object-cover" src={imageUrl} alt={title} />
-
       <div className="p-4">
-        <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="text-sm text-gray-600">Released: {releaseDate}</p>
+        <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
+        <p className="text-sm text-gray-600 mb-4">Released: {releaseDate}</p>
         <button
           onClick={handleFavoriteToggle}
-          className={`mt-2 px-4 py-2 rounded ${
-            isFavorite ? "bg-red-500 text-white" : "bg-gray-300 text-black"
+          className={`mt-2 w-full py-2 rounded-lg transition-colors ${
+            isFavorite
+              ? "bg-red-500 text-white hover:bg-red-600"
+              : "bg-gray-300 text-gray-700 hover:bg-gray-400"
           }`}
         >
           {isFavorite ? "Remove from Favorites" : "Add to Favorites"}

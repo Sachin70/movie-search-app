@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+"use client";
 
+import React, { useState, useEffect } from "react";
 import { fetchGenres } from "@/services/movie-fetching";
 
 type FilterPanelProps = {
@@ -49,21 +50,22 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   };
 
   return (
-    <div className="mb-4">
+    <div>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full p-2 bg-blue-500 text-white rounded-lg"
+        className="w-full p-3 bg-primary text-white rounded-lg"
       >
         {isOpen ? "Hide Filters" : "Show Filters"}
       </button>
 
       {isOpen && (
-        <div className="p-4 border border-gray-300 rounded-lg mt-2 bg-white">
-          <h3 className="text-lg font-bold mb-2">Filters</h3>
+        <div className="p-6 border border-gray-200 bg-white rounded-lg mt-2 shadow-sm">
+          <h3 className="text-lg font-bold mb-4 text-textPrimary">Filters</h3>
 
-          {/* Genre Filter */}
           <div className="mb-4">
-            <label className="block mb-1">Genre:</label>
+            <label className="block text-sm font-medium text-textPrimary mb-1">
+              Genre
+            </label>
             <select
               value={selectedGenre}
               onChange={(e) => setSelectedGenre(e.target.value)}
@@ -78,9 +80,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             </select>
           </div>
 
-          {/* Release Year Range Filter */}
           <div className="mb-4">
-            <label className="block mb-1">Release Year Range:</label>
+            <label className="block text-sm font-medium text-textPrimary mb-1">
+              Release Year Range
+            </label>
             <div className="flex space-x-2">
               <input
                 type="number"
@@ -99,9 +102,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             </div>
           </div>
 
-          {/* Rating Range Filter */}
           <div className="mb-4">
-            <label className="block mb-1">Rating Range:</label>
+            <label className="block text-sm font-medium text-textPrimary mb-1">
+              Rating Range
+            </label>
             <div className="flex space-x-2">
               <input
                 type="number"
@@ -124,10 +128,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             </div>
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center gap-2">
             <button
               onClick={handleApplyFilters}
-              className="p-2 bg-blue-500 text-white rounded-lg"
+              className="p-2 bg-primary text-white rounded-lg"
             >
               Apply Filters
             </button>
