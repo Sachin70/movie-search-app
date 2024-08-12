@@ -7,11 +7,10 @@ type SearchBarProps = {
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState("");
 
-  // Debounce logic
   useEffect(() => {
     const handler = setTimeout(() => {
       onSearch(query);
-    }, 700);
+    }, 500);
 
     return () => {
       clearTimeout(handler);
@@ -29,7 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         value={query}
         onChange={handleInputChange}
         placeholder="Search for movies..."
-        className="w-full p-3 border border-gray-300 rounded-lg text-xl"
+        className="w-full p-2 border border-gray-300 rounded-lg"
       />
     </div>
   );

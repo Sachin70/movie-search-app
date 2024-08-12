@@ -41,14 +41,15 @@ const MovieList: React.FC<MovieListProps> = ({
       releaseYearRange,
       ratingRange
     );
+    const results = response.data.results;
 
     if (page === 1) {
-      setMovies(response.results);
+      setMovies(results);
     } else {
-      setMovies((prevMovies) => [...prevMovies, ...response.results]);
+      setMovies((prevMovies) => [...prevMovies, ...results]);
     }
 
-    setHasMore(response.results.length > 0);
+    setHasMore(results.length > 0);
     setLoading(false);
   };
 
@@ -102,7 +103,6 @@ const MovieList: React.FC<MovieListProps> = ({
           ))}
         </div>
       )}
-
       {loading && page > 1 && (
         <div className="text-center">Loading more...</div>
       )}
